@@ -25,7 +25,7 @@ class whoopUser:
             self.AUTH_URL,
             json={
                 "grant_type": "password",
-                "issueRefresh": False,
+                "issueRefresh": True,
                 "password": password,
                 "username": email,
             },
@@ -276,6 +276,32 @@ class whoopUser:
             result_df = result_df.append(row_dict, ignore_index=True)
         return result_df
 
+    def get_sports(self):
+        """:return: List of sports and releveant information."""
+        sports_url = self.BASE_URL + "sports"
+        sports_request = requests.get(sports_url, headers=self.header)
+        return sports_request.json()
+
+    def get_sports_df(self):
+        """
+        Get sports list as a dataframe.
+        Converts thirteen digit UNIX timestamp to
+        normal time.
+        Can take a very long time to run depending on how many days are specified.
+        Maybe optimize later
+        """
+        sports_data = self.get_sports()
+        data = sports_data
+        result_df = pd.DataFrame(columns=["id", "name", "hasDistanceDetails", "category"])
+        for row in data:
+            row_dict = {}
+            row_dict["id"] = row["id"]
+            row_dict["name"] = row["name"]
+            row_dict["hasDistanceDetails"] = row["hasGps"]
+            row_dict["category"] = row["category"]
+            result_df = result_df.append(row_dict, ignore_index=True)
+        return result_df
+
     @staticmethod
     def convert_unix_time_to_current(timestamp):
         """will use local timezone for moment."""
@@ -303,8 +329,4 @@ class whoopUser:
 
         return dt.datetime.fromisoformat(final_str)
 
-    def get_sports(self):
-        """:return: List of sports and releveant information."""
-        sports_url = self.BASE_URL + "sports"
-        sports_request = requests.get(sports_url, headers=self.header)
-        return sports_request.json()
+
