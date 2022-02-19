@@ -8,7 +8,7 @@ user = whoopUser(email, password)
 #cycles_data = user.get_cycles_df()
 
 #get all workouts
-#workout_data = user.get_workouts_df()
+workout_data = user.get_workouts_df()
 
 #get heart rate data for one day
 start_end ={
@@ -24,4 +24,5 @@ sport_data = user.get_sports_df()
 
 if __name__ == "__main__":
     #print(str(hr_data))
-    print(str(sport_data))
+    #print(str(sport_data))
+    print(str(workout_data));
