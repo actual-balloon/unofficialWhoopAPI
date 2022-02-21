@@ -150,5 +150,41 @@ class whoopUserData:
             "is_normal"
         }
 
+        df_workout_columns = {
+            "cycle_id",
+            "created_at",
+            "updated_at",
+            "sport_id",
+            "activity_id",
+            "gps_enabled",
+            "intensity_score",
+            "max_heart_rate",
+            "average_heart_rate",
+            "distance",
+            "performance",
+            "energy",
+            "rpe",
+            "raw_intensity_score",
+            "altitude_gain",
+            "altitude_change",
+            "cumulative_workout_intensity",
+            "zone_durations",
+            "projected_score",
+            "confidence",
+            "wac_prediction",
+            "kilojoules",
+            "user_id",
+            "during",
+            "timezone_offset",
+            "survey_response_id",
+            "percent_recorded",
+            "auto_detected",
+            "state",
+            "responded",
+            "team_act_id",
+            "source"
+        }
+
+
 
 
